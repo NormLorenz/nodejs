@@ -2,7 +2,7 @@ const Joi = require('joi');
 const express = require('express'); // returns a function
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // req.body
 
 const courses = [
   { id: 1, name: 'course1' },

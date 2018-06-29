@@ -1,5 +1,18 @@
 ### https://codewithmosh.teachable.com/courses/293204/lectures/4509750
 
+* stopped at Templating Debugging time 3:21
+
+* DEBUG=app:log nodemon vidly/index.js
+
+* sudo npm install -global nodemon
+* export NODE_ENV=production
+* export NODE_ENV=development
+* export DEBUG=app:startup
+* export DEBUG=
+* export DEBUG=app:startup,app.db
+* export DEBUG=app:*
+* export app_password=1234
+
 * Chrome uses V8 javascript engine
 * Ryan Dahl invented Node
 * In the browser we have a 'window' global scope object which we can attach variables and functions
@@ -12,7 +25,7 @@
 * module.exports can export a single function or an object
 * object destructuring
 * nodemon
-
+nod
 * immediatly invoked function expression or IIFE is a wrapper around each module (module wrapper function)
 
 ```javascript

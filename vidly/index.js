@@ -1,8 +1,31 @@
+const config = require('config');
+const log = require('debug')('app:log');
+const morgan = require('morgan');
 const Joi = require('joi');
-const express = require('express'); // returns a function
+const express = require('express');
+const logger = require('./logger');
+const authenticate = require('./authenticate');
 
+// configuration
+log(`application name: ${config.get('name')}`);
+log(`environment: ${config.get('environment')}`);
+log(`mail server: ${config.get('mail.host')}`);
+log(`mail password: ${config.get('mail.password')}`);
+
+// initialize express and hook in middleware functions
 const app = express();
-app.use(express.json());
+
+app.use(express.json()); // request.body
+app.use(express.urlencoded({ extended: true })); // for key=value&key=value
+app.use(express.static('public')); // for static assets such as images, css, etc.
+
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  log('morgan enabled...');
+}
+
+app.use(logger);
+app.use(authenticate);
 
 const genres = [
   { id: 1, name: 'genre1' },
@@ -91,4 +114,4 @@ app.delete('/api/genres/:id', (request, response) => {
 
 // port
 const port = process.env.PORT || 3000;
-app.listen(port, () => { console.log(`listening on port ${port}...`); });
+app.listen(port, () => { log(`listening on port ${port}...`); });
